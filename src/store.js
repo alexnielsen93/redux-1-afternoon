@@ -17,6 +17,8 @@ export const UPDATELAST = 'UPDATELAST'
 export const ADDINGREDIENT = 'ADDINGREDIENT'
 export const ADDINSTRUCTIONS = 'ADDINSTRUCTIONS'
 export const ADDRECIPE = 'ADDRECIPE'
+export const DELETERECIPE = 'DELETERECIPE'
+export const CLEARFORM = 'CLEARFORM'
 
 function reducer (state = initialState, action){
   const { type, payload } = action
@@ -55,6 +57,14 @@ function reducer (state = initialState, action){
       }
       const newRecipes = [...state.recipes, recipe]
       return{...state, recipes: newRecipes}
+      case DELETERECIPE:
+       state.recipes.splice(payload, 1)
+       return {...state, recipes: state.recipes}
+    case CLEARFORM:
+
+    return{...initialState, recipes: state.recipes}
+    
+
 
   }
 }

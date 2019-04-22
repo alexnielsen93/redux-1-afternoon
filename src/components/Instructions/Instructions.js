@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import store, { ADDINSTRUCTIONS, ADDRECIPE } from '../../store'
+import store, { ADDINSTRUCTIONS, ADDRECIPE, CLEARFORM } from '../../store'
 
 class Instructions extends Component {
   constructor(props) {
@@ -33,6 +33,7 @@ class Instructions extends Component {
   }
   create() {
     store.dispatch({type: ADDRECIPE})
+    store.dispatch({type: CLEARFORM})
   }
   render() {
     const instructions = this.state.instructions.map((instruction, i) => {

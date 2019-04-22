@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import RecipeCard from "./../RecipeCard/RecipeCard";
 import "./Home.css";
-import store from '../../store'
+import store, { DELETERECIPE } from '../../store'
 
 class Home extends Component {
   constructor(props) {
@@ -12,12 +12,28 @@ class Home extends Component {
       recipes: reduxState.recipes
     };
   }
+  deleteRecipe=(index)=>{
+    store.dispatch({type: DELETERECIPE, payload: index
+    })
+  }
+componentDidMount(){
+  const reduxState = store.getState()
+  store.subscribe(()=>{
+  this.setState({
+    recipes: reduxState.recipes
+  })
+})
+}
+
+
+
+  
 
   render() {
     const recipes = this.state.recipes.map((recipe, i) => {
       return (
-        <RecipeCard
-          key={i}
+        <RecipeCard deleteRecipe = {this.deleteRecipe}
+          index={i}
           name={recipe.name}
           category={recipe.category}
           authorFirst={recipe.authorFirst}
